@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Dice Dash</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+    }
+
+    .board-container {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 20px;
+    }
+
+    .board {
+      display: flex;
+      flex-wrap: wrap;
+      width: 390px;  /* 60px * 6.5 */
+      height: 480px; /* 60px * 8 */
+      position: relative;
+    }
+
+    .cell {
+      width: 60px;
+      height: 60px;
+      border: 1px solid #ccc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.2;
+      position: absolute;
+    }
+
+    .player {
+      background-color: red;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .controls {
+      margin-bottom: 20px;
+    }
+
+    input[type="number"] {
+      width: 60px;
+    }
+
+    #move-log {
+      font-size: 14px;
+      line-height: 1.5;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+    }
+
+    .active-cell {
+  outline: 3px solid red;
+  outline-offset: -3px;
+    }
+    /* Уменьшенные доски-подсказки */
+#indexBoard1, #indexBoard2 {
+  transform: scale(0.5);
+  transform-origin: top left;
+  width: 195px;   /* половина от 390px */
+  height: 240px;  /* половина от 480px */
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+}
+  </style>
+</head>
+<body>
+
+  <h1>Dice Dash</h1>
+
+  <div class="controls">
+    <label>Комбинация кубиков (через запятую): 
+      <input type="text" id="dice-sequence" placeholder="пример: 346" autocomplete="off">
+
+    </label>
+    <br><br>
+    <label>Начальная клетка: 
+      <input type="number" id="start-index" value="0" min="0" max="25">
+    </label>
+    <br><br>
+    <label>Направление: 
+      <select id="start-board">
+        <option value="1">Влево</option>
+        <option value="2">Вправо</option>
+      </select>
+    </label>
+    <br><br>
+    <button id="start-game">Старт</button>
+  </div>
+
+  <div class="board-container">
+    <div style="display: flex; gap: 40px;">
+      <div style="flex: 1;">
+        <div class="board-container">
+          <div class="board" id="board1"></div>
+          <div class="board" id="board2"></div>
+        </div>
+        <div id="move-log"></div>
+      </div>
+      <div id="reward-summary" style="width: 200px; font-size: 14px; line-height: 1.5;"></div>
+      <div id="index-hint" style="margin-top: 20px;">
+        <strong>Подсказка по индексам клеток:</strong>
+        <div class="board" id="indexBoard1" style="margin-top: 10px;"></div>
+         </div>
+    </div>
+  </div>
+
+  <p id="log"></p>
+
+  <script src="script.js"></script>
+</body>
+</html>
